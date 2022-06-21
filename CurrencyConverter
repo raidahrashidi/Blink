@@ -1,0 +1,289 @@
+/*Group Name: BLINK
+
+Group Members
+1.SHARUL IRFAN BIN SHARUL ISRAM (1921825)
+2.MUHAMMAD ZIKRY ADIB BIN MOHD SUHAIMI (2112197)
+3.RAIDAH BINTI RASHIDI (2112866)
+4.MOHAMAD AIMAN AKIM ADANAN (2113823)
+5.RAIHANATUZZAHRA BINTI AZMI (2114488)
+6.ADAM KHUARIZMI BIN MASZLAN (2115347)
+7.TANJIM MST MOBASSHIRA SADIA (1824612)*/
+
+package currencyconverter;  
+
+// Explicit Imports//
+import java.util.Arrays;     
+import java.util.List;     
+import java.io.FileInputStream;   
+import java.util.Scanner;
+
+import javafx.application.Application;     
+import javafx.geometry.HPos;     
+import javafx.geometry.Insets;     
+import javafx.scene.Scene;     
+import javafx.scene.control.ChoiceBox;     
+import javafx.scene.control.Label;     
+import javafx.scene.control.TextField;     
+import javafx.scene.layout.ColumnConstraints;     
+import javafx.scene.layout.GridPane;     
+import javafx.scene.image.Image;  
+import javafx.scene.image.ImageView;  
+import javafx.scene.text.Font;  
+import javafx.stage.Stage;     
+import javafx.scene.control.Button;     
+import javafx.event.EventHandler;    
+import javafx.event.ActionEvent;     
+
+//Inheritance: "CurrencyConverter" sub-class extends to super-class "Application" .CurrencyConverter also type of Application//
+
+public class CurrencyConverter extends Application {     
+
+    Stage window;     
+    TextField amount; 
+    //Creating array for currency list
+    List<String> currencyList = Arrays.asList ("USD", "JPY", "GBP", "IDR", "THB", "SGD", "PHP", "BND", "MMK", "KHR", "VND", "LAK", "MYR");   
+
+//main method
+public static void main(String[] args) {     
+    Application.launch(args);     
+}     
+
+//convert method making in MYR from other currency and also making in other currency from MYR
+private double convert(String from, String to, double value) {     
+
+    System.out.println(from + " " + to + " " + value);     
+
+// First convert value to MYR    
+
+        switch (from) {    
+
+            case "USD":    
+                value = 4.39 * value;    
+                break;    
+                
+            case "JPY":    
+               value = 0.03 * value;    
+                break; 
+                
+            case "GBP":    
+               value = 5.54 * value;    
+                break;    
+
+            case "IDR":    
+               value = 0.00030 * value;    
+                break;    
+
+            case "THB":    
+                value = 0.12 * value;    
+                break;    
+
+            case "SGD":    
+                value = 3.20 * value;    
+                break;   
+
+            case "PHP":    
+                value = 0.08 * value;    
+                break;   
+                
+            case "BND":    
+                value = 3.20 * value;    
+                break;   
+
+            case "MMK":    
+                value = 0.0023 * value;    
+                break;   
+
+            case "KHR":    
+                value = 0.0010 * value;    
+                break;   
+
+            case "VND":    
+                value = 0.00018 * value;    
+                break;   
+
+            case "LAK":  
+                value = 0.00033 * value;    
+                break;   
+
+            case "MYR":    
+                value = 1.00 * value;    
+                break;   
+
+             default:    
+               break;    
+               
+        }     
+
+        // Now to make required currency in MYR.    
+
+        switch (to) {    
+
+            case "USD":    
+               return value * 0.22;    
+
+            case "JPY":    
+               return value * 28.81;    
+
+            case "GBP":    
+               return value * 0.18;    
+
+            case "IDR":   
+               return value * 3319.09;    
+
+            case "THB":   
+               return value * 7.77;    
+               
+            case "SGD":    
+               return value * 0.31;    
+
+            case "PHP":    
+               return value * 11.89;    
+
+            case "BND":    
+               return value * 0.31;    
+
+            case "MMK":   
+               return value * 420.46;    
+               
+            case "KHR":    
+               return value * 921.86;    
+
+            case "VND":    
+               return value * 5311.31;    
+
+            case "LAK":    
+               return value * 3013.66;    
+                
+            case "MYR":   
+               return value;   
+
+            default:    
+               break;    
+
+       }     
+
+          return value;     
+
+     }    
+
+public void wish(){
+ 
+    System.out.println("Welcome to Currency Converter !");
+ 
+}
+
+public void wish(int num){
+    
+    for(int i=0; i<2; i++){
+        
+    System.out.println("Thank you for using Currency Converter !");       
+    }
+}
+
+@Override  
+public void start(Stage primaryStage) throws Exception {     
+
+     window = primaryStage;     
+     window.setTitle("Currency Converter ");
+     
+	//Setting the grid and image
+     GridPane grid = new GridPane();     
+     ColumnConstraints column1 = new ColumnConstraints();     
+     column1.setPercentWidth(50);     
+     grid.getColumnConstraints().add(column1);     
+     grid.setPadding(new Insets(10, 30, 10, 10));     
+     grid.setVgap(25);     
+     grid.setHgap(30);     
+    Image image = new Image((this.getClass().getResourceAsStream("A.png"))); 
+    ImageView imageView = new ImageView(image);  
+
+     //Setting the position of the image   
+      GridPane.setHalignment(imageView, HPos.RIGHT);  
+
+      //setting the fit height and width of the image view   
+      imageView.setFitHeight(100);  
+      imageView.setFitWidth(100);   
+
+      //Setting the preserve ratio of the image view   
+      imageView.setPreserveRatio(true);    
+      
+      //Creating a Group object    
+      //Group root = new Group(imageView);    
+     //Title   
+	// Setting the label as Currency converter
+     Label nLabelTitle = new Label("Currency Converter");     
+     nLabelTitle.setFont(new Font("Imperial", 24));  
+     GridPane.setConstraints(nLabelTitle, 1, 0);     
+     GridPane.setHalignment(nLabelTitle, HPos.LEFT);  
+     
+
+     //Setting the label to Enter amount  
+     Label nLabel1 = new Label("Enter amount ");     
+     GridPane.setConstraints(nLabel1, 0, 1);     
+     GridPane.setHalignment(nLabel1, HPos.RIGHT);     
+     amount = new TextField();     
+     GridPane.setConstraints(amount, 1, 1);     
+     GridPane.setHalignment(amount, HPos.LEFT);  
+
+    //Setting the label Convert from 
+    Label nLabel2 = new Label("Convert from ");     
+    GridPane.setConstraints(nLabel2, 0, 2);     
+    GridPane.setHalignment(nLabel2, HPos.RIGHT);     
+    ChoiceBox<String> fromCurrency = new ChoiceBox<>();     
+    fromCurrency.getItems().addAll(currencyList);     
+    GridPane.setConstraints(fromCurrency, 1, 2);     
+    GridPane.setHalignment(fromCurrency, HPos.LEFT);     
+
+    //Setting the label Convert to  
+    Label nLabel3 = new Label("Convert to ");     
+    GridPane.setConstraints(nLabel3, 0, 3);     
+    GridPane.setHalignment(nLabel3, HPos.RIGHT);     
+    ChoiceBox<String> toCurrency = new ChoiceBox<>();     
+    toCurrency.getItems().addAll(currencyList);     
+    GridPane.setConstraints(toCurrency, 1, 3);     
+    GridPane.setHalignment(toCurrency, HPos.LEFT);     
+
+    // Creating a button with btn object as Convert     
+    Button btn = new Button("Convert ");     
+    GridPane.setConstraints(btn, 0, 4, 2, 1);     
+    GridPane.setHalignment(btn, HPos.CENTER);     
+
+    //Setting label for Result output 
+    Label nLabel5 = new Label("CONVERSION RESULT = ");
+    nLabel5.setFont(new Font("Arial Bold",15));  
+    GridPane.setHalignment(nLabel5, HPos.CENTER);   
+
+    GridPane.setConstraints(nLabel5, 0, 5, 1, 1);
+    Label resultLabel = new Label("  ");     
+    resultLabel.setFont(new Font("Arial Bold",20));  
+    GridPane.setConstraints(resultLabel, 0, 5, 2, 1);     
+    GridPane.setHalignment(resultLabel, HPos.RIGHT);   
+
+        // Add a action listener on that     
+        EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {     
+
+@Override     
+
+public void handle(ActionEvent event) {     
+	
+        resultLabel.setText(     
+        convert(fromCurrency.getValue(), toCurrency.getValue(), Double.parseDouble(amount.getText()))     
+
+        + toCurrency.getValue() + " " );     
+
+}     
+    };     
+	//Invoking the btn object for action
+    btn.setOnAction(buttonHandler);     
+    grid.getChildren().addAll(imageView, nLabelTitle, nLabel1, amount, nLabel2, fromCurrency, nLabel3, toCurrency, btn, nLabel5, resultLabel);     
+    Scene scene = new Scene(grid, 600, 400);     
+
+    window.setScene(scene);     
+    window.show();     
+    
+  }     
+
+}
+
+
+
